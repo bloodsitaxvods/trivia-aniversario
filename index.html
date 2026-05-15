@@ -645,6 +645,39 @@
     transform: translateY(0);
   }
 
+  /* Dato curioso (se muestra al revelar la respuesta) */
+  .fact-box {
+    background: rgba(254, 92, 168, 0.07);
+    border: 1px solid rgba(254, 92, 168, 0.22);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 20px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.5s ease;
+    display: none;
+  }
+  .fact-box.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fact-box .fact-label {
+    font-family: 'Bungee', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    color: var(--neon-pink);
+    margin-bottom: 8px;
+    text-shadow: 0 0 10px var(--neon-pink);
+  }
+  .fact-box .fact-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    color: var(--light-pink);
+    line-height: 1.65;
+    letter-spacing: 0.3px;
+  }
+
   .next-btn {
     background: transparent;
     border: 2px solid var(--neon-pink);
@@ -965,8 +998,150 @@
         trivia1: placeholderDbdImg()                 // 5 imagenes con alternativas
       },
       extra: {
-        trivia1: placeholderText('extra', 1, 10),    // 10 preguntas texto
-        trivia2: placeholderText('extra', 2, 10)     // 10 preguntas texto
+        trivia1: [
+          {
+            tipo: 'texto',
+            pregunta: '¿Cuál es el verdadero nombre de The Trapper?',
+            opciones: ['A) Evan MacMillan', 'B) Philip Ojomo', 'C) Max Thompson Jr.', 'D) Herman Carter'],
+            correcta: 0,
+            fact: 'Evan MacMillan es el hijo de un magnate industrial abusivo. Fue él mismo quien encerró a su padre en el sótano, aunque no pretendía matarlo.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿Cuál fue el PRIMER killer en ser añadido al juego?',
+            opciones: ['A) The Wraith', 'B) The Hillbilly', 'C) The Trapper', 'D) The Nurse'],
+            correcta: 2,
+            fact: 'The Trapper es la mascota oficial del juego y aparece en el arte de la portada, el cinemático de apertura y la mayoría del merchandise.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿Cómo se llama en el juego Michael Myers de Halloween?',
+            opciones: ['A) The Killer', 'B) The Shape', 'C) The Shadow', 'D) The Stalker'],
+            correcta: 1,
+            fact: 'El nombre "The Shape" viene directamente de los créditos de la película original de Halloween (1978), donde Myers aparece acreditado como "The Shape".'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿Cuál es el poder de The Nurse?',
+            opciones: ["A) Spencer's Last Breath", "B) Carter's Spark", "C) Yamaoka's Haunting", 'D) Surge'],
+            correcta: 0,
+            fact: 'The Nurse puede atravesar paredes, pallets y generadores con su blink. Es considerada históricamente una de las killers más poderosas del juego.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿De qué franquicia viene The Pig (Amanda Young)?',
+            opciones: ['A) Halloween', 'B) Saw', 'C) Scream', 'D) A Nightmare on Elm Street'],
+            correcta: 1,
+            fact: 'Amanda Young es la aprendiz de Jigsaw en la saga Saw. Su poder incluye las Reverse Bear Traps que colocan a los survivors en una carrera contra el tiempo.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿Cuál es el verdadero nombre de The Wraith?',
+            opciones: ['A) Philip Ojomo', 'B) Evan MacMillan', 'C) Max Thompson Jr.', 'D) Caleb Quinn'],
+            correcta: 0,
+            fact: 'Philip Ojomo era un inmigrante que trabajaba en un deshuesadero. Descubrió que su jefe usaba los cuerpos de trabajadores desaparecidos en la maquinaria.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: "¿A qué killer se conoce como 'The Nightmare'?",
+            opciones: ['A) Michael Myers', 'B) Pyramid Head', 'C) Freddy Krueger', 'D) The Dredge'],
+            correcta: 2,
+            fact: 'En enero de 2025, Freddy recibió un rework importante que lo subió en los tier lists: ahora puede crear Dream Pallets que explotan e Hilar a survivors dormidos.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿Cuántos killers había en el lanzamiento original de Dead by Daylight en 2016?',
+            opciones: ['A) 2', 'B) 3', 'C) 4', 'D) 5'],
+            correcta: 1,
+            fact: 'El juego lanzó con 3 killers originales: The Trapper, The Wraith y The Hillbilly. The Nurse fue añadida poco después del lanzamiento.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿Cuál es el poder de The Huntress?',
+            opciones: ['A) Bear Trap', 'B) Hunting Hatchets', 'C) Feral Frenzy', 'D) Shred'],
+            correcta: 1,
+            fact: 'The Huntress (Anna) fue la PRIMERA killer de largo alcance en DBD. Canta una nana sobre lobos que roban niños, que es su terror radius único.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿De qué universo viene The Demogorgon?',
+            opciones: ['A) Alien', 'B) Stranger Things', 'C) The Thing', 'D) Cloverfield'],
+            correcta: 1,
+            fact: 'El contenido de Stranger Things fue retirado en 2021 por expiración de licencia, pero regresó completo en noviembre de 2023 tras renovar el acuerdo.'
+          }
+        ],
+        trivia2: [
+          {
+            tipo: 'texto',
+            pregunta: '¿Cuál es el nombre real de The Hillbilly?',
+            opciones: ['A) Frank Morrison', 'B) Max Thompson Jr.', 'C) Kenneth Chase', 'D) Danny Johnson'],
+            correcta: 1,
+            fact: 'Max Thompson Jr. fue encadenado y escondido por sus propios padres, quienes se avergonzaban de su apariencia. Creció en aislamiento total en su propiedad.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿Qué killer viene de la saga Resident Evil?',
+            opciones: ['A) The Mastermind (Albert Wesker)', 'B) The Executioner', 'C) The Blight', 'D) The Knight'],
+            correcta: 0,
+            fact: 'Albert Wesker es el antagonista icónico de Resident Evil. En DBD usa su poder Virulent Bound para lanzarse a los survivors e infectarlos con el virus Uroboros.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿Cómo se llama realmente The Ghost Face en DBD?',
+            opciones: ['A) Sidney Prescott', 'B) Danny Johnson', 'C) Frank Morrison', 'D) Caleb Quinn'],
+            correcta: 1,
+            fact: 'Danny Johnson es una versión original de Ghostface en DBD, no el personaje de Scream. Es un asesino en serie que mató a sus propias víctimas para escribir artículos de noticias sobre ellas.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿Cuál es el poder de The Legion?',
+            opciones: ['A) Corrupt Purge', 'B) Feral Frenzy', 'C) Blood Echo', "D) Jigsaw's Baptism"],
+            correcta: 1,
+            fact: 'The Legion está formado por 4 miembros: Frank, Julie, Susie y Joey. Feral Frenzy les permite correr a alta velocidad e infligir Deep Wound a varios survivors.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿Qué killer fue añadido en el CHAPTER 38 en enero de 2026?',
+            opciones: ['A) The Lich', 'B) The Animatronic', 'C) The First (Henry Creel / Vecna)', 'D) The Krasue'],
+            correcta: 2,
+            fact: 'Henry Creel "The First", también conocido como Vecna, llegó en el Stranger Things Chapter 2 el 27 de enero de 2026, siendo técnicamente el segundo Vecna en el juego.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿De qué película/saga viene Pyramid Head?',
+            opciones: ['A) Hellraiser', 'B) Silent Hill', 'C) Candyman', 'D) The Evil Dead'],
+            correcta: 1,
+            fact: 'Pyramid Head es conocido como "The Executioner" en DBD. Su poder Punishment of the Damned puede herir a survivors a través de paredes con su gigantesca Gran Cuchillo.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿Cuántos generadores deben repararse para abrir las puertas de salida?',
+            opciones: ['A) 3', 'B) 4', 'C) 5', 'D) 6'],
+            correcta: 2,
+            fact: 'Los survivors deben reparar exactamente 5 generadores para activar las 2 puertas de salida. Este es el núcleo del loop de gameplay desde el lanzamiento.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿Qué estudio desarrolla Dead by Daylight?',
+            opciones: ['A) Blizzard Entertainment', 'B) Behaviour Interactive', 'C) Starbreeze Studios', 'D) NetEase'],
+            correcta: 1,
+            fact: 'Behaviour Interactive es un estudio canadiense. Starbreeze Studios publicó el juego originalmente de 2016 a 2018, cuando Behaviour compró los derechos de publicación.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿Cuál es el verdadero nombre de The Clown?',
+            opciones: ['A) Jeffrey Hawk', 'B) Kenneth Chase', 'C) Danny Johnson', 'D) Talbot Grimes'],
+            correcta: 0,
+            fact: 'Jeffrey Hawk es un mago y payaso con un pasado oscuro. Su poder usa frascos de Afterpiece Tonic que ralentizan a los survivors, y Afterpiece Antidote que lo acelera a él.'
+          },
+          {
+            tipo: 'texto',
+            pregunta: '¿A qué engine migró Dead by Daylight en 2024?',
+            opciones: ['A) Unity 6', 'B) Unreal Engine 5', 'C) CryEngine 5', 'D) Godot 4'],
+            correcta: 1,
+            fact: 'DBD migró de Unreal Engine 4 a Unreal Engine 5 en abril de 2024, lo que permitió mejoras visuales significativas y sienta las bases para futuras actualizaciones gráficas.'
+          }
+        ]
       }
     };
 
@@ -1157,6 +1332,7 @@
 
         <div class="question-card">
           ${body}
+          ${q.fact ? '<div class="fact-box" id="factBox"><div class="fact-label">DATO CURIOSO</div><div class="fact-text">' + q.fact + '</div></div>' : ''}
         </div>
 
         <div class="next-area">
@@ -1242,7 +1418,6 @@
       const q = TRIVIAS[game][state.currentSet][state.questionIndex];
 
       if (q.tipo === 'imagen-sin-alt') {
-        // Cambia el trozo por la imagen completa + revela el nombre
         const img = document.getElementById('quizImage');
         const frame = document.getElementById('imageFrame');
         const name = document.getElementById('revealName');
@@ -1253,9 +1428,15 @@
           name.classList.add('show');
         }
       } else {
-        // Texto o imagen con alternativas → marca la correcta
         const opts = document.querySelectorAll('.option');
         if (opts[q.correcta]) opts[q.correcta].classList.add('correct-reveal');
+      }
+
+      // Mostrar dato curioso si existe
+      const factBox = document.getElementById('factBox');
+      if (factBox) {
+        // Pequeño delay para que aparezca después de la respuesta
+        setTimeout(() => factBox.classList.add('show'), 350);
       }
     }
 
