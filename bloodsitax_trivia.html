@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLOODSITAX ♡ Aniversario del Canal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@300;400;500;600;700&family=Bungee&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --neon-pink: #FE5CA8;
+    --hot-pink: #FE5CA8;
+    --fuscia: #FE5CA8;
+    --light-pink: #FFC1E1;
+    --bright-pink: #FE5CA8;
+    --deep-magenta: #8A003F;
+    --blood-red: #48001F;
+    --dark-purple: #1A0010;
+    --almost-black: #12000D;
+    --black: #000000;
+  }
+
+  html, body {
+    background: var(--black);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(254, 92, 168, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(138, 0, 63, 0.2) 0%, transparent 50%),
+      var(--black);
+    z-index: 0;
+  }
+
+  #sakura-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .app {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ===== HEADER / LOGO ===== */
+  .header { text-align: center; padding: 50px 20px 15px; }
+
+  .logo {
+    font-family: 'Bungee', sans-serif;
+    font-size: clamp(2.8rem, 9vw, 5.5rem);
+    letter-spacing: 4px;
+    display: inline-block;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .logo span {
+    position: relative;
+    display: inline-block;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 3px var(--hot-pink);
+    text-shadow:
+      0 0 2px #fff,
+      0 0 12px var(--neon-pink),
+      0 0 30px var(--hot-pink),
+      0 0 70px var(--hot-pink);
+    /* el "hum" se hace via opacity (GPU) en vez de text-shadow (repinta) */
+    animation: neon-hum 2.8s ease-in-out infinite;
+  }
+
+  .logo span::before {
+    content: attr(data-letter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px #FFF0F7;
+    text-shadow: none;
+    pointer-events: none;
+  }
+
+  .logo span.off {
+    -webkit-text-stroke-color: rgba(90, 35, 65, 0.35);
+    text-shadow: none;
+    animation: none;
+  }
+  .logo span.off::before { -webkit-text-stroke-color: rgba(120, 60, 90, 0.25); }
+
+  @keyframes neon-hum {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.88; }
+  }
+
+  .tagline {
+    margin-top: 6px;
+    font-size: 0.8rem;
+    letter-spacing: 8px;
+    color: var(--bright-pink);
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+  .tagline .heart { color: var(--neon-pink); animation: pulse 1.5s infinite; display: inline-block; }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.25); } }
+
+  /* ===== TABS ===== */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 22px 15px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgba(254, 92, 168, 0.18);
+    background: transparent;
+    z-index: 20;
+  }
+
+  .tab {
+    background: transparent;
+    border: 1px solid var(--deep-magenta);
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+  }
+  .tab:hover {
+    background: rgba(254, 92, 168, 0.08);
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    box-shadow: 0 0 12px rgba(254, 92, 168, 0.3);
+  }
+  .tab.active {
+    background: var(--neon-pink);
+    border-color: var(--neon-pink);
+    color: #000;
+    font-weight: 700;
+    box-shadow: 0 0 15px var(--neon-pink), 0 0 30px rgba(254, 92, 168, 0.5);
+  }
+
+  /* ===== MAIN CONTENT ===== */
+  .content {
+    flex: 1;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .section { display: none; }
+  .section.active { display: block; animation: fadeIn 0.4s ease; contain: layout style; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== BOTONES GRANDES HOME ===== */
+  .button-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 22px;
+    margin-top: 10px;
+  }
+
+  .big-btn {
+    background: linear-gradient(135deg, var(--almost-black) 0%, var(--dark-purple) 100%);
+    border: 1px solid var(--deep-magenta);
+    border-radius: 18px;
+    padding: 28px 24px;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    box-shadow:
+      0 0 18px rgba(254, 92, 168, 0.22),
+      inset 0 0 30px rgba(254, 92, 168, 0.04);
+  }
+  .big-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(254, 92, 168, 0.18), transparent);
+    transition: left 0.6s ease;
+    pointer-events: none;
+  }
+  .big-btn::after {
+    content: '♡';
+    position: absolute;
+    top: 14px; right: 18px;
+    color: var(--deep-magenta);
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  .big-btn:hover {
+    transform: translateY(-5px);
+    border-color: var(--neon-pink);
+    box-shadow:
+      0 0 35px rgba(254, 92, 168, 0.55),
+      0 0 70px rgba(254, 92, 168, 0.25),
+      inset 0 0 40px rgba(254, 92, 168, 0.08);
+  }
+  .big-btn:hover::before { left: 100%; }
+  .big-btn:hover::after { color: var(--neon-pink); text-shadow: 0 0 8px var(--neon-pink); }
+
+  .big-btn .icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--blood-red), var(--deep-magenta));
+    border: 1px solid var(--neon-pink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: 0 0 18px rgba(254, 92, 168, 0.45);
+  }
+  .big-btn .icon-wrap svg {
+    width: 28px; height: 28px;
+    stroke: var(--neon-pink);
+    fill: none; stroke-width: 2;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .big-btn h2 {
+    font-family: 'Bungee', sans-serif;
+    font-size: 1.25rem;
+    margin-bottom: 6px;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  .big-btn .desc {
+    color: var(--bright-pink);
+    font-size: 0.82rem;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+    opacity: 0.85;
+  }
+  .big-btn .action {
+    color: var(--neon-pink);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .big-btn .action .arrow { transition: transform 0.3s ease; }
+  .big-btn:hover .action .arrow { transform: translateX(4px); }
+
+  /* ===== TITULOS DE SECCION ===== */
+  .section-head { text-align: center; margin-bottom: 32px; }
+  .section-head h2 {
+    font-family: 'Bungee', sans-serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    color: #fff;
+    letter-spacing: 3px;
+    text-shadow: 0 0 12px var(--neon-pink), 0 0 28px var(--hot-pink);
+    margin-bottom: 8px;
+  }
+  .section-head p {
+    color: var(--bright-pink);
+    font-size: 0.78rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  /* ===== BOTONES DE TRIVIA (sub) ===== */
+  .trivia-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .trivia-grid.cols-2 { grid-template-columns: repeat(2, 1fr); max-width: 720px; }
+  @media (max-width: 700px) {
+    .trivia-grid, .trivia-grid.cols-2 { grid-template-columns: 1fr; }
+  }
+
+  .trivia-btn {
+    position: relative;
+    background: linear-gradient(135deg, var(--almost-black) 0%, var(--dark-purple) 100%);
+    border: 1px solid var(--deep-magenta);
+    border-radius: 16px;
+    padding: 42px 24px;
+    cursor: pointer;
+    color: #fff;
+    font-family: 'Bungee', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    text-align: center;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+      0 0 20px rgba(254, 92, 168, 0.3),
+      inset 0 0 35px rgba(254, 92, 168, 0.05);
+  }
+  .trivia-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(254, 92, 168, 0.22), transparent);
+    transition: left 0.7s ease;
+    pointer-events: none;
+  }
+  .trivia-btn:hover {
+    transform: translateY(-5px);
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    text-shadow: 0 0 14px var(--neon-pink), 0 0 28px var(--hot-pink);
+    box-shadow:
+      0 0 38px rgba(254, 92, 168, 0.65),
+      0 0 75px rgba(254, 92, 168, 0.3),
+      inset 0 0 40px rgba(254, 92, 168, 0.1);
+  }
+  .trivia-btn:hover::before { left: 100%; }
+
+  .trivia-btn.disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    filter: grayscale(0.4);
+    padding-bottom: 56px;
+  }
+  .trivia-btn.disabled:hover {
+    transform: none;
+    border-color: var(--deep-magenta);
+    color: #fff;
+    text-shadow: none;
+    box-shadow:
+      0 0 20px rgba(254, 92, 168, 0.3),
+      inset 0 0 35px rgba(254, 92, 168, 0.05);
+  }
+  .trivia-btn.disabled::after {
+    content: 'PRÓXIMAMENTE';
+    position: absolute;
+    bottom: 16px; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--light-pink);
+    font-weight: 500;
+    opacity: 0.85;
+  }
+
+  /* ===== BACK BUTTON ===== */
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid var(--deep-magenta);
+    color: var(--bright-pink);
+    padding: 9px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .back-btn:hover {
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    box-shadow: 0 0 14px rgba(254, 92, 168, 0.4);
+    transform: translateX(-3px);
+  }
+  .back-btn .arrow { transition: transform 0.3s ease; }
+  .back-btn:hover .arrow { transform: translateX(-4px); }
+
+  /* ===== PANTALLA COMENZAR ===== */
+  .start-screen {
+    background: linear-gradient(135deg, var(--almost-black) 0%, var(--dark-purple) 100%);
+    border: 1px solid var(--neon-pink);
+    border-radius: 22px;
+    padding: 70px 30px;
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+    box-shadow:
+      0 0 40px rgba(254, 92, 168, 0.45),
+      0 0 80px rgba(254, 92, 168, 0.18),
+      inset 0 0 60px rgba(254, 92, 168, 0.05);
+  }
+  .start-screen h3 {
+    font-family: 'Bungee', sans-serif;
+    color: #fff;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+    text-shadow: 0 0 18px var(--neon-pink), 0 0 36px var(--hot-pink);
+    line-height: 1.25;
+  }
+  .start-screen .info {
+    color: var(--bright-pink);
+    font-size: 0.82rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 44px;
+    opacity: 0.85;
+  }
+  .start-btn {
+    background: linear-gradient(135deg, var(--blood-red), var(--deep-magenta));
+    border: 2px solid var(--neon-pink);
+    color: #fff;
+    font-family: 'Bungee', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 6px;
+    padding: 22px 70px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    text-shadow: 0 0 12px var(--neon-pink);
+    box-shadow: 0 0 30px var(--neon-pink), 0 0 70px rgba(254, 92, 168, 0.5);
+    animation: pulse-glow 2.2s ease-in-out infinite;
+    will-change: transform;
+  }
+  @keyframes pulse-glow {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.04); }
+  }
+  .start-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    color: #fff;
+    text-shadow: 0 0 15px #fff, 0 0 30px var(--neon-pink);
+  }
+
+  /* ===== PANTALLA PREGUNTA ===== */
+  .quiz-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 26px;
+    gap: 18px;
+    flex-wrap: wrap;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .progress-info {
+    font-family: 'Bungee', sans-serif;
+    color: var(--bright-pink);
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+  }
+  .progress-info span {
+    color: var(--neon-pink);
+    text-shadow: 0 0 12px var(--neon-pink), 0 0 24px var(--hot-pink);
+    font-size: 1.5rem;
+    margin: 0 3px;
+  }
+
+  .timer { position: relative; width: 86px; height: 86px; }
+  .timer svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .timer-bg { fill: none; stroke: rgba(254, 92, 168, 0.18); stroke-width: 6; }
+  .timer-ring {
+    fill: none;
+    stroke: var(--neon-pink);
+    stroke-width: 6;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 8px var(--neon-pink));
+    transition: stroke-dashoffset 1s linear, stroke 0.3s, filter 0.3s;
+  }
+  .timer-ring.warning { stroke: #FFA800; filter: drop-shadow(0 0 10px #FFA800); }
+  .timer-ring.danger {
+    stroke: #FF1A4D;
+    filter: drop-shadow(0 0 12px #FF1A4D);
+    animation: timer-pulse 0.7s infinite;
+  }
+  @keyframes timer-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
+  .timer-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bungee', sans-serif;
+    font-size: 1.55rem;
+    color: #fff;
+    text-shadow: 0 0 12px var(--neon-pink);
+  }
+
+  .question-card {
+    background: linear-gradient(135deg, var(--almost-black) 0%, var(--dark-purple) 100%);
+    border: 1px solid var(--neon-pink);
+    border-radius: 22px;
+    padding: 38px;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow:
+      0 0 45px rgba(254, 92, 168, 0.5),
+      0 0 90px rgba(254, 92, 168, 0.18),
+      inset 0 0 80px rgba(254, 92, 168, 0.05);
+  }
+
+  .question-text {
+    font-family: 'Bungee', sans-serif;
+    font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+    line-height: 1.45;
+    color: #fff;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(254, 92, 168, 0.45);
+    letter-spacing: 1.5px;
+  }
+
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 700px) {
+    .options { grid-template-columns: 1fr; }
+    .question-card { padding: 26px; }
+  }
+
+  .option {
+    position: relative;
+    background: linear-gradient(135deg, rgba(72, 0, 31, 0.45), rgba(26, 0, 16, 0.55));
+    border: 1px solid var(--deep-magenta);
+    color: #fff;
+    padding: 20px 22px;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 1.02rem;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    text-align: left;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 14px rgba(254, 92, 168, 0.12);
+  }
+
+  .option.correct-reveal {
+    border-color: var(--neon-pink);
+    background: linear-gradient(135deg, rgba(254, 92, 168, 0.32), rgba(254, 92, 168, 0.18));
+    color: #fff;
+    text-shadow: 0 0 10px #fff, 0 0 20px var(--neon-pink);
+    box-shadow:
+      0 0 32px var(--neon-pink),
+      0 0 70px var(--hot-pink),
+      inset 0 0 32px rgba(254, 92, 168, 0.3);
+    animation: correct-pulse 1.5s ease-in-out infinite;
+    will-change: transform;
+  }
+  @keyframes correct-pulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.025); }
+  }
+
+  .next-area { margin-top: 30px; display: flex; justify-content: center; }
+
+  /* ===== MARCO DE IMAGEN (trivia imagenes) ===== */
+  .image-frame {
+    position: relative;
+    max-width: 380px;
+    margin: 0 auto 24px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid var(--neon-pink);
+    background: var(--almost-black);
+    box-shadow:
+      0 0 28px rgba(254, 92, 168, 0.55),
+      0 0 60px rgba(254, 92, 168, 0.25),
+      inset 0 0 30px rgba(254, 92, 168, 0.08);
+    transition: all 0.5s ease;
+  }
+  .image-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    transition: opacity 0.4s ease;
+  }
+  .image-frame.revealed {
+    box-shadow:
+      0 0 45px var(--neon-pink),
+      0 0 90px rgba(254, 92, 168, 0.55),
+      0 0 140px rgba(254, 92, 168, 0.3),
+      inset 0 0 40px rgba(254, 92, 168, 0.15);
+    animation: frame-pulse 1.6s ease-in-out infinite;
+    will-change: transform;
+  }
+  @keyframes frame-pulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.02); }
+  }
+
+  /* Revelado del nombre del personaje (marvel · trivia imagenes) */
+  .reveal-name {
+    text-align: center;
+    font-family: 'Bungee', sans-serif;
+    font-size: clamp(1.1rem, 2.6vw, 1.6rem);
+    letter-spacing: 2px;
+    color: var(--bright-pink);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.5s ease;
+    min-height: 1.5em;
+  }
+  .reveal-name strong {
+    color: #fff;
+    margin-left: 6px;
+    text-shadow:
+      0 0 10px var(--neon-pink),
+      0 0 24px var(--neon-pink),
+      0 0 48px var(--hot-pink);
+  }
+  .reveal-name.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .next-btn {
+    background: transparent;
+    border: 2px solid var(--neon-pink);
+    color: #fff;
+    font-family: 'Bungee', sans-serif;
+    font-size: 1.05rem;
+    letter-spacing: 4px;
+    padding: 16px 50px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    text-shadow: 0 0 10px var(--neon-pink);
+    box-shadow:
+      0 0 18px rgba(254, 92, 168, 0.4),
+      inset 0 0 20px rgba(254, 92, 168, 0.06);
+  }
+  .next-btn:hover {
+    background: rgba(254, 92, 168, 0.15);
+    color: #fff;
+    text-shadow: 0 0 12px #fff, 0 0 24px var(--neon-pink);
+    box-shadow:
+      0 0 28px var(--neon-pink),
+      0 0 60px rgba(254, 92, 168, 0.4),
+      inset 0 0 30px rgba(254, 92, 168, 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* ===== PLACEHOLDER ===== */
+  .placeholder {
+    background: linear-gradient(135deg, var(--almost-black), var(--dark-purple));
+    border: 1px dashed var(--neon-pink);
+    border-radius: 22px;
+    padding: 70px 30px;
+    text-align: center;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 720px;
+    margin: 0 auto;
+    box-shadow:
+      0 0 35px rgba(254, 92, 168, 0.4),
+      inset 0 0 60px rgba(254, 92, 168, 0.05);
+  }
+  .placeholder .ph-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: rgba(254, 92, 168, 0.12);
+    border: 1px solid var(--neon-pink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    box-shadow: 0 0 30px rgba(254, 92, 168, 0.4);
+  }
+  .placeholder .ph-icon svg {
+    width: 32px; height: 32px;
+    stroke: var(--neon-pink);
+    fill: none; stroke-width: 2;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .placeholder h3 {
+    font-family: 'Bungee', sans-serif;
+    color: #fff;
+    font-size: 1.6rem;
+    margin-bottom: 14px;
+    letter-spacing: 4px;
+    text-shadow: 0 0 18px var(--neon-pink), 0 0 36px var(--hot-pink);
+  }
+  .placeholder p {
+    color: var(--bright-pink);
+    opacity: 0.85;
+    font-size: 0.9rem;
+    max-width: 480px;
+    line-height: 1.6;
+    letter-spacing: 1px;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--deep-magenta);
+    font-size: 0.72rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(254, 92, 168, 0.12);
+    margin-top: 40px;
+  }
+  .footer .heart {
+    color: var(--neon-pink);
+    animation: pulse 1.5s infinite;
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--deep-magenta); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--neon-pink); }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 640px) {
+    .header { padding: 30px 15px 10px; }
+    .tabs { padding: 15px 10px; gap: 6px; }
+    .tab { padding: 8px 14px; font-size: 0.7rem; letter-spacing: 1px; }
+    .button-grid { grid-template-columns: 1fr; gap: 16px; }
+    .content { padding: 25px 15px; }
+    .placeholder { padding: 50px 20px; min-height: 300px; }
+    .start-screen { padding: 50px 20px; }
+    .start-btn { font-size: 1.2rem; padding: 18px 40px; letter-spacing: 4px; }
+  }
+</style>
+</head>
+<body>
+  <canvas id="sakura-canvas"></canvas>
+
+  <div class="app">
+    <header class="header">
+      <h1 class="logo" id="logo"><span data-letter="B">B</span><span data-letter="L">L</span><span data-letter="O">O</span><span data-letter="O">O</span><span data-letter="D">D</span><span data-letter="S">S</span><span data-letter="I">I</span><span data-letter="T">T</span><span data-letter="A">A</span><span data-letter="X">X</span></h1>
+      <p class="tagline"><span class="heart">♡</span> Aniversario del Canal <span class="heart">♡</span></p>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="home">Inicio</button>
+      <button class="tab" data-tab="marvel">Marvel Rivals</button>
+      <button class="tab" data-tab="dbd">Dead by Daylight</button>
+      <button class="tab" data-tab="extra">Extra</button>
+    </nav>
+
+    <main class="content">
+
+      <!-- ===== HOME ===== -->
+      <section class="section active" id="home">
+        <div class="button-grid">
+
+          <button class="big-btn" data-goto="marvel">
+            <div class="icon-wrap">
+              <svg viewBox="0 0 24 24">
+                <path d="M13 2L4 14h6l-1 8 10-13h-7l1-7z"/>
+              </svg>
+            </div>
+            <h2>Marvel Rivals</h2>
+            <p class="desc">Trivia de heroes y lore</p>
+            <span class="action">Entrar <span class="arrow">→</span></span>
+          </button>
+
+          <button class="big-btn" data-goto="dbd">
+            <div class="icon-wrap">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2C7.5 2 4 5.5 4 10c0 2.5 1 4.5 2 5.5V19h2v2h2v-2h4v2h2v-2h2v-3.5c1-1 2-3 2-5.5 0-4.5-3.5-8-8-8z"/>
+                <circle cx="9" cy="11" r="1.5" fill="currentColor" stroke="none"/>
+                <circle cx="15" cy="11" r="1.5" fill="currentColor" stroke="none"/>
+                <path d="M10 15l2 1 2-1"/>
+              </svg>
+            </div>
+            <h2>Dead by Daylight</h2>
+            <p class="desc">Trivia de killers y survivors</p>
+            <span class="action">Entrar <span class="arrow">→</span></span>
+          </button>
+
+          <button class="big-btn" data-goto="extra">
+            <div class="icon-wrap">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/>
+              </svg>
+            </div>
+            <h2>Extra</h2>
+            <p class="desc">Trivias variadas</p>
+            <span class="action">Entrar <span class="arrow">→</span></span>
+          </button>
+
+        </div>
+      </section>
+
+      <!-- ===== MARVEL ===== -->
+      <section class="section" id="marvel">
+        <div id="marvel-content"></div>
+      </section>
+
+      <!-- ===== DBD ===== -->
+      <section class="section" id="dbd">
+        <div id="dbd-content"></div>
+      </section>
+
+      <!-- ===== EXTRA ===== -->
+      <section class="section" id="extra">
+        <div id="extra-content"></div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <span class="heart">♡</span> BLOODSITAX <span class="heart">♡</span>
+    </footer>
+  </div>
+
+  <script>
+    /* ============================================================
+       ⚠️  AQUI VAN LAS PREGUNTAS DE LA TRIVIA
+       ------------------------------------------------------------
+       3 TIPOS de pregunta soportados:
+
+       1) TEXTO (con 4 alternativas)
+          {
+            tipo: 'texto',
+            pregunta: "Texto de la pregunta",
+            opciones: ["A) ...", "B) ...", "C) ...", "D) ..."],
+            correcta: 0   // 0=A, 1=B, 2=C, 3=D
+          }
+
+       2) IMAGEN SIN ALTERNATIVAS (Marvel Rivals · Trivia Imagenes)
+          Muestra trozo de imagen → pasan 20s → revela imagen completa + nombre
+          {
+            tipo: 'imagen-sin-alt',
+            pregunta: "¿Que personaje es?",
+            imagen: "URL_TROZO.png",
+            imagenCompleta: "URL_COMPLETA.png",
+            nombre: "Spider-Man"
+          }
+
+       3) IMAGEN CON ALTERNATIVAS (DBD · Trivia Imagenes)
+          {
+            tipo: 'imagen-con-alt',
+            pregunta: "¿Que personaje es?",
+            imagen: "URL.png",
+            opciones: ["A) ...", "B) ...", "C) ...", "D) ..."],
+            correcta: 0
+          }
+       ============================================================ */
+
+    // Placeholder visual mientras no haya imagen real
+    const phImg = (txt) => `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><rect width='400' height='400' fill='%231A0010'/><rect x='8' y='8' width='384' height='384' fill='none' stroke='%23FE5CA8' stroke-width='2' stroke-dasharray='8 6'/><text x='50%' y='50%' fill='%23FE5CA8' font-family='Arial' font-size='22' text-anchor='middle' dy='.3em' letter-spacing='2'>${txt}</text></svg>`;
+
+    const placeholderText = (game, set, count) => Array.from({ length: count }, (_, i) => ({
+      tipo: 'texto',
+      pregunta: `[${game.toUpperCase()} · TRIVIA ${set}] Pregunta ${i + 1} — reemplazar.`,
+      opciones: [
+        `A) Alternativa A`,
+        `B) Alternativa B`,
+        `C) Alternativa C`,
+        `D) Alternativa D`
+      ],
+      correcta: 0
+    }));
+
+    const placeholderMarvelImg = () => Array.from({ length: 5 }, (_, i) => ({
+      tipo: 'imagen-sin-alt',
+      pregunta: '¿Qué personaje es?',
+      imagen: phImg(`TROZO ${i + 1}`),
+      imagenCompleta: phImg(`IMAGEN COMPLETA ${i + 1}`),
+      nombre: `Personaje ${i + 1}`
+    }));
+
+    const placeholderDbdImg = () => Array.from({ length: 5 }, (_, i) => {
+      const num = i + 1;
+      const esPerk = num % 2 === 0; // 2,4 → perks
+      return {
+        tipo: 'imagen-con-alt',
+        pregunta: esPerk ? '¿Esta perk a qué personaje pertenece?' : '¿Qué personaje es?',
+        imagen: phImg(esPerk ? `PERK ${num}` : `PERSONAJE ${num}`),
+        opciones: [
+          `A) Alternativa A`,
+          `B) Alternativa B`,
+          `C) Alternativa C`,
+          `D) Alternativa D`
+        ],
+        correcta: 0
+      };
+    });
+
+    const marvelTrivia1 = [
+      {
+        tipo: 'imagen-sin-alt',
+        pregunta: '¿Qué personaje es?',
+        imagen: 'imagenes_para_trivia/emma_corte.png',
+        imagenCompleta: 'imagenes_para_trivia/emma.png',
+        nombre: 'EMMA FROST'
+      },
+      {
+        tipo: 'imagen-sin-alt',
+        pregunta: '¿Qué personaje es?',
+        imagen: 'imagenes_para_trivia/black_widow_corte.png',
+        imagenCompleta: 'imagenes_para_trivia/black_widow.png',
+        nombre: 'BLACK WIDOW'
+      },
+      {
+        tipo: 'imagen-sin-alt',
+        pregunta: '¿Qué personaje es?',
+        imagen: 'imagenes_para_trivia/gambito_corte.png',
+        imagenCompleta: 'imagenes_para_trivia/gambito.png',
+        nombre: 'GAMBITO'
+      },
+      {
+        tipo: 'imagen-sin-alt',
+        pregunta: '¿Qué personaje es?',
+        imagen: 'imagenes_para_trivia/jeff_corte.png',
+        imagenCompleta: 'imagenes_para_trivia/jeff.png',
+        nombre: 'JEFF'
+      },
+      {
+        tipo: 'imagen-sin-alt',
+        pregunta: '¿Qué personaje es?',
+        imagen: 'imagenes_para_trivia/magik_corte.png',
+        imagenCompleta: 'imagenes_para_trivia/magik.png',
+        nombre: 'MAGIK'
+      }
+    ];
+
+    const TRIVIAS = {
+      marvel: {
+        trivia1: marvelTrivia1                       // 5 imagenes sin alternativas
+      },
+      dbd: {
+        trivia1: placeholderDbdImg()                 // 5 imagenes con alternativas
+      },
+      extra: {
+        trivia1: placeholderText('extra', 1, 10),    // 10 preguntas texto
+        trivia2: placeholderText('extra', 2, 10)     // 10 preguntas texto
+      }
+    };
+
+    /* ============================================================
+       ESTADO + NAVEGACION
+       ============================================================ */
+    const TIMER_SECONDS = 20;
+
+    const state = {
+      tab: 'home',
+      view: { marvel: 'menu', dbd: 'menu', extra: 'menu' },
+      currentSet: null,
+      questionIndex: 0,
+      timer: TIMER_SECONDS,
+      timerInterval: null,
+      revealed: false
+    };
+
+    const tabs = document.querySelectorAll('.tab');
+    const sections = document.querySelectorAll('.section');
+    const bigBtns = document.querySelectorAll('.big-btn');
+
+    function showTab(name) {
+      stopTimer();
+      tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+      sections.forEach(s => s.classList.toggle('active', s.id === name));
+      state.tab = name;
+
+      if (name === 'marvel' || name === 'dbd' || name === 'extra') {
+        state.view[name] = 'menu';
+        renderGame(name);
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    tabs.forEach(tab => tab.addEventListener('click', () => showTab(tab.dataset.tab)));
+    bigBtns.forEach(btn => btn.addEventListener('click', () => showTab(btn.dataset.goto)));
+
+    function renderGame(game) {
+      const view = state.view[game];
+      const container = document.getElementById(`${game}-content`);
+      if (view === 'menu')          container.innerHTML = renderMenu(game);
+      else if (view === 'start')    container.innerHTML = renderStart(game);
+      else if (view === 'question') {
+        container.innerHTML = renderQuestion(game);
+        startTimer();
+        preloadNext(game);  // pre-carga la imagen de la siguiente pregunta
+      }
+    }
+
+    // Pre-carga de imágenes de la próxima pregunta + imagen revelada de la actual
+    const preloadedSrcs = new Set();
+    function preload(src) {
+      if (!src || preloadedSrcs.has(src)) return;
+      preloadedSrcs.add(src);
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = src;
+    }
+    function preloadNext(game) {
+      const set = state.currentSet;
+      const arr = TRIVIAS[game][set];
+      const cur = arr[state.questionIndex];
+      // imagen revelada de la actual (Marvel)
+      if (cur && cur.imagenCompleta) preload(cur.imagenCompleta);
+      // imágenes de la próxima
+      const next = arr[state.questionIndex + 1];
+      if (!next) return;
+      if (next.imagen)         preload(next.imagen);
+      if (next.imagenCompleta) preload(next.imagenCompleta);
+    }
+
+    function renderMenu(game) {
+      const titles = { marvel: 'MARVEL RIVALS', dbd: 'DEAD BY DAYLIGHT', extra: 'EXTRA' };
+      const title = titles[game] || game.toUpperCase();
+
+      let items;
+      if (game === 'marvel') {
+        items = [
+          { key: 'trivia1', label: 'TRIVIA 1', disabled: false }
+        ];
+      } else if (game === 'dbd') {
+        items = [
+          { key: 'trivia1', label: 'TRIVIA 1', disabled: false }
+        ];
+      } else {
+        items = [
+          { key: 'trivia1', label: 'TRIVIA<br>EXTRA 1', disabled: false },
+          { key: 'trivia2', label: 'TRIVIA<br>EXTRA 2', disabled: false }
+        ];
+      }
+
+      const colsClass = items.length === 2 ? 'cols-2' : '';
+
+      return `
+        <div class="section-head">
+          <h2>${title}</h2>
+          <p>Selecciona modo</p>
+        </div>
+        <div class="trivia-grid ${colsClass}">
+          ${items.map(t => `
+            <button class="trivia-btn ${t.disabled ? 'disabled' : ''}"
+              ${t.disabled ? '' : `onclick="startTrivia('${game}', '${t.key}')"`}>
+              ${t.label}
+            </button>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function renderStart(game) {
+      const set = state.currentSet;
+      const setLabel = set === 'triviaImg' ? 'TRIVIA IMÁGENES' : set.replace('trivia', 'TRIVIA ');
+      const labels = { marvel: 'MARVEL RIVALS', dbd: 'DEAD BY DAYLIGHT', extra: 'EXTRA' };
+      const gameLabel = labels[game] || game.toUpperCase();
+      const totalQ = TRIVIAS[game][set].length;
+
+      return `
+        <button class="back-btn" onclick="backToMenu('${game}')">
+          <span class="arrow">←</span> Volver
+        </button>
+        <div class="start-screen">
+          <h3>${gameLabel}<br>${setLabel}</h3>
+          <p class="info">${totalQ} preguntas · 20 segundos cada una</p>
+          <button class="start-btn" onclick="beginQuestions('${game}')">COMENZAR</button>
+        </div>
+      `;
+    }
+
+    function renderQuestion(game) {
+      const set = state.currentSet;
+      const q = TRIVIAS[game][set][state.questionIndex];
+      const totalQ = TRIVIAS[game][set].length;
+      const isLast = state.questionIndex === totalQ - 1;
+
+      // ----- Cuerpo de la pregunta segun tipo -----
+      let body = '';
+
+      if (q.tipo === 'imagen-sin-alt') {
+        // Marvel · Trivia Imagenes — sin alternativas
+        body = `
+          <div class="question-text">${q.pregunta}</div>
+          <div class="image-frame" id="imageFrame">
+            <img src="${q.imagen}" alt="trozo" id="quizImage" decoding="async">
+          </div>
+          <div class="reveal-name" id="revealName"></div>
+        `;
+      } else if (q.tipo === 'imagen-con-alt') {
+        // DBD · Trivia Imagenes — con 4 alternativas
+        body = `
+          <div class="question-text">${q.pregunta}</div>
+          <div class="image-frame">
+            <img src="${q.imagen}" alt="imagen pregunta" decoding="async">
+          </div>
+          <div class="options" id="options">
+            ${q.opciones.map((op, i) => `
+              <div class="option" data-idx="${i}">${op}</div>
+            `).join('')}
+          </div>
+        `;
+      } else {
+        // Texto puro con alternativas
+        body = `
+          <div class="question-text">${q.pregunta}</div>
+          <div class="options" id="options">
+            ${q.opciones.map((op, i) => `
+              <div class="option" data-idx="${i}">${op}</div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      return `
+        <div class="quiz-top">
+          <button class="back-btn" onclick="backToMenu('${game}')" style="margin-bottom:0;">
+            <span class="arrow">←</span> Salir
+          </button>
+          <div class="progress-info">PREGUNTA <span>${state.questionIndex + 1}</span> / ${totalQ}</div>
+          <div class="timer">
+            <svg viewBox="0 0 100 100">
+              <circle class="timer-bg" cx="50" cy="50" r="45"></circle>
+              <circle id="timerRing" class="timer-ring" cx="50" cy="50" r="45"
+                stroke-dasharray="282.74" stroke-dashoffset="0"></circle>
+            </svg>
+            <div class="timer-text" id="timerText">${TIMER_SECONDS}</div>
+          </div>
+        </div>
+
+        <div class="question-card">
+          ${body}
+        </div>
+
+        <div class="next-area">
+          <button class="next-btn" onclick="nextQuestion('${game}')">
+            ${isLast ? 'FINALIZAR' : 'SIGUIENTE'}
+          </button>
+        </div>
+      `;
+    }
+
+    /* ===== ACCIONES ===== */
+    function startTrivia(game, set) {
+      state.currentSet = set;
+      state.questionIndex = 0;
+      state.view[game] = 'start';
+      renderGame(game);
+    }
+
+    function beginQuestions(game) {
+      state.questionIndex = 0;
+      state.view[game] = 'question';
+      renderGame(game);
+    }
+
+    function nextQuestion(game) {
+      stopTimer();
+      const set = state.currentSet;
+      const totalQ = TRIVIAS[game][set].length;
+
+      if (state.questionIndex >= totalQ - 1) {
+        state.questionIndex = 0;
+        state.view[game] = 'menu';
+        renderGame(game);
+      } else {
+        state.questionIndex++;
+        renderGame(game);
+      }
+    }
+
+    function backToMenu(game) {
+      stopTimer();
+      state.view[game] = 'menu';
+      renderGame(game);
+    }
+
+    /* ===== TIMER ===== */
+    function startTimer() {
+      state.timer = TIMER_SECONDS;
+      state.revealed = false;
+      updateTimerVisual();
+      state.timerInterval = setInterval(() => {
+        state.timer--;
+        updateTimerVisual();
+        if (state.timer <= 0) {
+          stopTimer();
+          revealAnswer();
+        }
+      }, 1000);
+    }
+    function stopTimer() {
+      if (state.timerInterval) {
+        clearInterval(state.timerInterval);
+        state.timerInterval = null;
+      }
+    }
+    function updateTimerVisual() {
+      const ring = document.getElementById('timerRing');
+      const text = document.getElementById('timerText');
+      if (!ring || !text) return;
+      const circumference = 2 * Math.PI * 45;
+      const progress = Math.max(0, state.timer) / TIMER_SECONDS;
+      ring.style.strokeDashoffset = circumference * (1 - progress);
+      text.textContent = Math.max(0, state.timer);
+
+      ring.classList.remove('warning', 'danger');
+      if (state.timer <= 5)        ring.classList.add('danger');
+      else if (state.timer <= 10)  ring.classList.add('warning');
+    }
+    function revealAnswer() {
+      if (state.revealed) return;
+      state.revealed = true;
+      const game = state.tab;
+      const q = TRIVIAS[game][state.currentSet][state.questionIndex];
+
+      if (q.tipo === 'imagen-sin-alt') {
+        // Cambia el trozo por la imagen completa + revela el nombre
+        const img = document.getElementById('quizImage');
+        const frame = document.getElementById('imageFrame');
+        const name = document.getElementById('revealName');
+        if (img) img.src = q.imagenCompleta;
+        if (frame) frame.classList.add('revealed');
+        if (name) {
+          name.innerHTML = `Es: <strong>${q.nombre}</strong>`;
+          name.classList.add('show');
+        }
+      } else {
+        // Texto o imagen con alternativas → marca la correcta
+        const opts = document.querySelectorAll('.option');
+        if (opts[q.correcta]) opts[q.correcta].classList.add('correct-reveal');
+      }
+    }
+
+    /* ============================================================
+       CANVAS — corazones y estrellas (optimizado con sprites)
+       ------------------------------------------------------------
+       - Sprites pre-renderizados en canvas offscreen (drawImage es
+         mucho más rápido que redibujar paths + shadowBlur cada frame)
+       - Pausa cuando la pestaña no está visible
+       - Respeta prefers-reduced-motion
+       - Cantidad reducida si el dispositivo es de baja gama
+       ============================================================ */
+    const canvas = document.getElementById('sakura-canvas');
+    const ctx = canvas.getContext('2d', { alpha: true });
+    const PALETTE = ['#FE5CA8', '#FE5CA8', '#FFC1E1', '#FFFFFF'];
+    const SPRITE_SIZE = 64; // base de cada sprite cacheado
+    const sprites = {};     // cache: sprites[`${type}-${color}`] = canvas
+
+    function makeSprite(type, color) {
+      const c = document.createElement('canvas');
+      c.width = c.height = SPRITE_SIZE;
+      const cx = c.getContext('2d');
+      cx.translate(SPRITE_SIZE / 2, SPRITE_SIZE / 2);
+      cx.fillStyle = color;
+      cx.shadowColor = color;
+      cx.shadowBlur = 18;
+      const s = SPRITE_SIZE * 0.32; // tamaño base del path
+      if (type === 'heart') {
+        cx.beginPath();
+        cx.moveTo(0, -s * 0.35);
+        cx.bezierCurveTo(-s * 0.95, -s * 1.15, -s * 1.4, -s * 0.15, 0, s);
+        cx.bezierCurveTo(s * 1.4, -s * 0.15, s * 0.95, -s * 1.15, 0, -s * 0.35);
+        cx.closePath();
+        cx.fill();
+      } else {
+        cx.beginPath();
+        for (let i = 0; i < 10; i++) {
+          const r = i % 2 === 0 ? s : s * 0.42;
+          const a = (Math.PI / 5) * i - Math.PI / 2;
+          const x = Math.cos(a) * r;
+          const y = Math.sin(a) * r;
+          if (i === 0) cx.moveTo(x, y);
+          else cx.lineTo(x, y);
+        }
+        cx.closePath();
+        cx.fill();
+      }
+      return c;
+    }
+
+    // Pre-renderizar todos los sprites una sola vez
+    function buildSprites() {
+      for (const color of PALETTE) {
+        sprites[`heart-${color}`] = makeSprite('heart', color);
+        sprites[`star-${color}`]  = makeSprite('star', color);
+      }
+    }
+    buildSprites();
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+
+    // resize con debounce
+    let resizeTO;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTO);
+      resizeTO = setTimeout(resize, 150);
+    });
+
+    class Particle {
+      constructor(init) { this.reset(init); }
+
+      reset(init) {
+        this.x = Math.random() * canvas.width;
+        this.y = init ? Math.random() * canvas.height : -40 - Math.random() * 120;
+        // Tamaño aumentado 80% sobre el base original
+        this.scale = ((Math.random() * 7 + 4) * 1.8) / (SPRITE_SIZE * 0.32);
+        this.speedY = Math.random() * 1.2 + 0.4;
+        this.speedX = (Math.random() - 0.5) * 0.6;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.025;
+        this.opacity = Math.random() * 0.55 + 0.4;
+        this.sway = Math.random() * 1.8 + 0.4;
+        this.swayOffset = Math.random() * Math.PI * 2;
+        const color = PALETTE[(Math.random() * PALETTE.length) | 0];
+        const type  = Math.random() > 0.45 ? 'heart' : 'star';
+        this.sprite = sprites[`${type}-${color}`];
+      }
+
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX + Math.sin((this.y + this.swayOffset) * 0.01) * this.sway * 0.25;
+        this.rotation += this.rotSpeed;
+        if (this.y > canvas.height + 40) this.reset(false);
+      }
+
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.scale(this.scale, this.scale);
+        // drawImage es mucho más barato que stroke/fill + shadowBlur
+        ctx.drawImage(this.sprite, -SPRITE_SIZE / 2, -SPRITE_SIZE / 2);
+        ctx.restore();
+      }
+    }
+
+    // Cantidad adaptada al dispositivo
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let particleCount;
+    if (reducedMotion)                       particleCount = 0;
+    else if (window.innerWidth < 480)        particleCount = 22;
+    else if (window.innerWidth < 768)        particleCount = 32;
+    else                                     particleCount = 55;
+
+    const particles = Array.from({ length: particleCount }, () => new Particle(true));
+
+    let running = true;
+    let rafId = null;
+
+    function animate() {
+      if (!running) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
+      rafId = requestAnimationFrame(animate);
+    }
+    if (particleCount > 0) animate();
+
+    // Pausar cuando la pestaña está oculta (ahorra CPU)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        running = false;
+        if (rafId) cancelAnimationFrame(rafId);
+      } else if (particleCount > 0) {
+        running = true;
+        animate();
+      }
+    });
+
+    /* ============================================================
+       LOGO — parpadeo de letras (preservado del hub)
+       ============================================================ */
+    const neonLetters = document.querySelectorAll('#logo span');
+
+    neonLetters.forEach(l => {
+      l.style.animationDelay = (-Math.random() * 3).toFixed(2) + 's';
+    });
+
+    let offCount = 0;
+    const MAX_OFF = 2;
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+
+    async function failLetter(el) {
+      if (el.dataset.failing === '1' || offCount >= MAX_OFF) return;
+      el.dataset.failing = '1';
+      offCount++;
+
+      el.classList.add('off');
+      await wait(70 + Math.random() * 50);
+      el.classList.remove('off');
+      await wait(40 + Math.random() * 50);
+      el.classList.add('off');
+      await wait(110 + Math.random() * 90);
+      el.classList.remove('off');
+      await wait(30 + Math.random() * 50);
+      el.classList.add('off');
+
+      await wait(500 + Math.random() * 1800);
+
+      el.classList.remove('off');
+      await wait(40 + Math.random() * 50);
+      el.classList.add('off');
+      await wait(60 + Math.random() * 70);
+      el.classList.remove('off');
+      await wait(25 + Math.random() * 40);
+      el.classList.add('off');
+      await wait(50 + Math.random() * 60);
+      el.classList.remove('off');
+
+      offCount--;
+      el.dataset.failing = '0';
+    }
+
+    (function scheduleFlicker() {
+      const delay = 500 + Math.random() * 2800;
+      setTimeout(() => {
+        // No correr si la pestaña no está visible
+        if (!document.hidden && offCount < MAX_OFF) {
+          const candidates = [...neonLetters].filter(l => l.dataset.failing !== '1');
+          if (candidates.length > 0) {
+            failLetter(candidates[Math.floor(Math.random() * candidates.length)]);
+          }
+        }
+        scheduleFlicker();
+      }, delay);
+    })();
+  </script>
+</body>
+</html>
