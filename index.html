@@ -592,7 +592,10 @@
       0 0 28px rgba(254, 92, 168, 0.55),
       0 0 60px rgba(254, 92, 168, 0.25),
       inset 0 0 30px rgba(254, 92, 168, 0.08);
-    transition: all 0.5s ease;
+    transition: max-width 0.5s ease, box-shadow 0.5s ease;
+  }
+  .image-frame.small {
+    max-width: 220px;
   }
   .image-frame img {
     display: block;
@@ -603,6 +606,7 @@
     transition: opacity 0.4s ease;
   }
   .image-frame.revealed {
+    max-width: 380px;
     box-shadow:
       0 0 45px var(--neon-pink),
       0 0 90px rgba(254, 92, 168, 0.55),
@@ -1105,7 +1109,7 @@
         // Marvel · Trivia Imagenes — sin alternativas
         body = `
           <div class="question-text">${q.pregunta}</div>
-          <div class="image-frame" id="imageFrame">
+          <div class="image-frame small" id="imageFrame">
             <img src="${q.imagen}" alt="trozo" id="quizImage" decoding="async">
           </div>
           <div class="reveal-name" id="revealName"></div>
