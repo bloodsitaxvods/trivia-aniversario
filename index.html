@@ -990,12 +990,51 @@
       }
     ];
 
+    const marvelTrivia2 = [
+      {
+        tipo: 'imagen-sin-alt',
+        pregunta: '¿Qué personaje es?',
+        imagen: 'imagenes_para_trivia/hulk_corte.png',
+        imagenCompleta: 'imagenes_para_trivia/hulk.png',
+        nombre: 'HULK'
+      },
+      {
+        tipo: 'imagen-sin-alt',
+        pregunta: '¿Qué personaje es?',
+        imagen: 'imagenes_para_trivia/luna_corte.png',
+        imagenCompleta: 'imagenes_para_trivia/luna.png',
+        nombre: 'LUNA SNOW'
+      },
+      {
+        tipo: 'imagen-sin-alt',
+        pregunta: '¿Qué personaje es?',
+        imagen: 'imagenes_para_trivia/rogue_corte.png',
+        imagenCompleta: 'imagenes_para_trivia/rogue.png',
+        nombre: 'ROGUE'
+      },
+      {
+        tipo: 'imagen-sin-alt',
+        pregunta: '¿Qué personaje es?',
+        imagen: 'imagenes_para_trivia/spiderman_corte.png',
+        imagenCompleta: 'imagenes_para_trivia/spiderman.png',
+        nombre: 'SPIDER MAN'
+      },
+      {
+        tipo: 'imagen-sin-alt',
+        pregunta: '¿Qué personaje es?',
+        imagen: 'imagenes_para_trivia/storm_corte.png',
+        imagenCompleta: 'imagenes_para_trivia/storm.png',
+        nombre: 'STORM'
+      }
+    ];
+
     const TRIVIAS = {
       marvel: {
-        trivia1: marvelTrivia1                       // 5 imagenes sin alternativas
+        trivia1: marvelTrivia1,                      // 5 imagenes sin alternativas
+        trivia2: marvelTrivia2                       // 5 imagenes sin alternativas
       },
       dbd: {
-        trivia1: placeholderDbdImg()                 // 5 imagenes con alternativas
+        trivia1: placeholderText('dbd', 1, 5)        // 5 preguntas texto con alternativas
       },
       extra: {
         trivia1: [
@@ -1221,7 +1260,8 @@
       let items;
       if (game === 'marvel') {
         items = [
-          { key: 'trivia1', label: 'TRIVIA 1', disabled: false }
+          { key: 'trivia1', label: 'TRIVIA 1', disabled: false },
+          { key: 'trivia2', label: 'TRIVIA 2', disabled: false }
         ];
       } else if (game === 'dbd') {
         items = [
